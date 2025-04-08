@@ -37,6 +37,11 @@ namespace IMDB_Project.ViewModels
             CurrentViewModel = new HomeViewModel();
         }
 
+        //pass in the view model to navigate to
+        public ICommand NavigateToHomeCommand => new RelayCommand(_ => _navigationService.NavigateTo<HomeViewModel>());
+        public ICommand NavigateToTitleCommand => new RelayCommand(_ => _navigationService.NavigateTo<TitleViewModel>());
+
+
         //command to exit
         public ICommand ExitCommand
         {

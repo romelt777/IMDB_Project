@@ -6,12 +6,124 @@
     <!--MAIN PAGE / HOME VIEW / ETC -->
     <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 
+    <!-- Define a named style for sub text -->
+    <Style x:Key="subHeaderStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="ExtraBold"></Setter>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
+
+    <!-- Define a named style for search text -->
+    <Style x:Key="searchLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="Bold"></Setter>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
+
+
+    <!--search style-->
+    <Style x:Key="SearchStyle" TargetType="TextBox">
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="MinWidth" Value="200"/>
+        <Setter Property="MaxWidth" Value="300"/>
+        <Setter Property="Height" Value="40"/>
+    </Style>
+
+
+    <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+    <!--TOP MENU NAVIGATOR-->
+    <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+
+    <!-- Transparent Menu Style -->
+    <Style x:Key="TransparentMenuStyle" TargetType="Menu">
+        <!-- Make the background transparent -->
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
+    <!-- Transparent MenuItem Style -->
+    <Style x:Key="TransparentMenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="14"/>
+
+        <!--  hover for better visibility -->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="LightGray"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 
 
+    <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+    <!--Title PAGE / HOME VIEW / ETC -->
+    <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+    <!-- Style for the album list box column header -->
+    <Style x:Key="DataGridHeaderStyle" TargetType="TextBlock">
+        <Setter Property="Width" Value="200" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10,0,0,0" />
+        <Setter Property="FontSize" Value="32" />
+    </Style>
 
 
 
+    <!-- Transparent DataGrid Style -->
+    <Style x:Key="TransparentDataGridStyle" TargetType="{x:Type DataGrid}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="RowBackground" Value="Transparent" />
+        <Setter Property="AlternatingRowBackground" Value="Transparent" />
+        <Setter Property="GridLinesVisibility" Value="None" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+        <Setter Property="IsReadOnly" Value="True" />
+
+        <!-- cell style to transparent -->
+        <Setter Property="CellStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#50AAAAAA" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <!-- Setting the column header style -->
+        <Setter Property="ColumnHeaderStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderBrush" Value="#50AAAAAA" />
+                    <Setter Property="BorderThickness" Value="0,0,1,1" />
+                    <Setter Property="Padding" Value="5" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 
 

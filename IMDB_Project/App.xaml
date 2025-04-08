@@ -22,6 +22,9 @@
                 <!--when app gets homeViewModel, show homeView-->
                 <views:HomeView></views:HomeView>
             </DataTemplate>
-        </ResourceDictionary>
+            <DataTemplate DataType="{x:Type vm:TitleViewModel}">
+                <!--when app gets homeViewModel, show homeView-->
+                <views:TitleView></views:TitleView>
+            </DataTemplate>        </ResourceDictionary>
     </Application.Resources>
 </Application>

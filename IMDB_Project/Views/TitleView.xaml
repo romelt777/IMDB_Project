@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="IMDB_Project.Views.TitleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IMDB_Project.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--header-->
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Text="Titles" Style="{StaticResource subHeaderStyle}"/>
+
+            <!--search bar-->
+            <Label Style="{StaticResource searchLabelStyle}">Search Titles:</Label>
+            <TextBox 
+            Margin="10" 
+            Width="300" HorizontalAlignment="Left"
+            Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource SearchStyle}" />
+        </StackPanel>
+
+
+        <ScrollViewer Grid.Row="2"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <DataGrid ItemsSource="{Binding FilteredTitles}" 
+                      AutoGenerateColumns="False" 
+                      CanUserAddRows="False" 
+                      CanUserDeleteRows="False" 
+                      Style="{StaticResource TransparentDataGridStyle}"
+                       Height="500">
+                <DataGrid.Columns>
+                    <!--Title-->
+                    <DataGridTextColumn Binding="{Binding PrimaryTitle}" FontSize="16" Width="450">
+                        <DataGridTextColumn.Header>
+                            <StackPanel >
+                                <TextBlock Text="Title" Style="{StaticResource DataGridHeaderStyle}"/>
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

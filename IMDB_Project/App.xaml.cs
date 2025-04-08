@@ -6,6 +6,9 @@ using IMDB_Project.Services;
 using IMDB_Project.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Data;
+using System.DirectoryServices;
+using Models;
+using System.Collections.ObjectModel;
 
 namespace IMDB_Project
 {
@@ -55,9 +58,11 @@ namespace IMDB_Project
 
 
             // Register your services and view models here
-            serviceCollection.AddSingleton<MainViewModel>();
-            serviceCollection.AddSingleton<MainWindow>();
             serviceCollection.AddSingleton<INavigationService, NavigationService>();
+            serviceCollection.AddSingleton<MainWindow>();
+            serviceCollection.AddSingleton<MainViewModel>();
+            serviceCollection.AddSingleton<HomeViewModel>();
+            serviceCollection.AddSingleton<TitleViewModel>();
         }
 
         private void LoadData()
@@ -69,8 +74,10 @@ namespace IMDB_Project
                 var dbContext = scope.ServiceProvider.GetRequiredService<ImdbContext>();
 
                 //get instance of viewmodel classes
+                var titleViewModel = scope.ServiceProvider.GetRequiredService<TitleViewModel>();
 
                 //load data from database into viewmodel collections
+                titleViewModel.Titles = new ObservableCollection<Title>(dbContext.Titles.ToList());
 
 
             }

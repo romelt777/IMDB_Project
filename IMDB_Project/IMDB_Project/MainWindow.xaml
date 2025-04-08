@@ -7,6 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+
+        <!-- App Content Section -->
+        <StackPanel  Grid.Column="1">
+            <Border >
+                <StackPanel Height="520">
+                    <ContentControl Content="{Binding CurrentViewModel}">
+                    </ContentControl>
+                </StackPanel>
+            </Border>
+        </StackPanel>
     </Grid>
 </Window>

@@ -1,9 +1,21 @@
 ﻿<Application x:Class="IMDB_Project.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:IMDB_Project"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:IMDB_Project" 
+             xmlns:vm="clr-namespace:IMDB_Project.ViewModels"
+             Startup="Application_Startup">
     <Application.Resources>
-         
+        <ResourceDictionary>
+
+
+
+
+
+            <!--define data templates for each view model--><!--
+            <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+                --><!--when app gets homeViewModel, show homeView--><!--
+                <iews:HomeView></iews:HomeView>
+            </DataTemplate>-->
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

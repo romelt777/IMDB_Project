@@ -7,9 +7,14 @@
              Startup="Application_Startup">
     <Application.Resources>
         <ResourceDictionary>
+            <!--define styles.xaml dictionary-->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-
-
+            <!--define image assets-->
+            <!--exit image-->
+            <BitmapImage x:Key="Exit" UriSource="/Resources/exit.jpg" />
 
 
             <!--define data templates for each view model-->

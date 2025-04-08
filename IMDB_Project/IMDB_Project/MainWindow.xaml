@@ -6,21 +6,37 @@
         xmlns:local="clr-namespace:IMDB_Project"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
-
-        <!-- App Content Section -->
-        <StackPanel  Grid.Column="1">
-            <Border >
-                <StackPanel Height="520">
-                    <ContentControl Content="{Binding CurrentViewModel}">
-                    </ContentControl>
-                </StackPanel>
-            </Border>
+    <StackPanel>
+        <StackPanel>
+            <Menu >
+                <MenuItem Header="File" >
+                    <MenuItem Header="Exit" Command="{Binding ExitCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="{StaticResource Exit}" Width="16" Height="16" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+           
         </StackPanel>
-    </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <!-- App Content Section -->
+            <StackPanel  Grid.Column="1">
+                <Border >
+                    <StackPanel Height="520">
+                        <ContentControl Content="{Binding CurrentViewModel}">
+                        </ContentControl>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+
 </Window>

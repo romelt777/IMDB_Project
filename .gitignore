@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/IMDB_Project/Data/ImdbContext.cs
+/IMDB_Project/App.xaml.cs
+/IMDB_Project/App.config
+/IMDB_Project/Data/ImdbContext.cs
+/IMDB_Project/App.config
+/IMDB_Project/App.xaml.cs

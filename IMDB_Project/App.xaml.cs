@@ -48,6 +48,7 @@ namespace IMDB_Project
             {
                 throw new Exception("ERROR: Connection string is NULL in App.xaml.cs! Check App.config.");
             }
+            
 
 
             //instantiating the viewmodels and other classes and adding them to service collection
@@ -63,6 +64,13 @@ namespace IMDB_Project
             serviceCollection.AddSingleton<MainViewModel>();
             serviceCollection.AddSingleton<HomeViewModel>();
             serviceCollection.AddSingleton<TitleViewModel>();
+
+            serviceCollection.AddSingleton<GenreViewModel>();
+            serviceCollection.AddSingleton<EpisodeViewModel>();
+            serviceCollection.AddSingleton<CreatorViewModel>();
+            serviceCollection.AddSingleton<RatingViewModel>();
+
+
         }
 
         private void LoadData()

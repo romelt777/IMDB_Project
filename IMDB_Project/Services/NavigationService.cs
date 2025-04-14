@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IMDB_Project.ViewModels;
+using IMDB_Project.Views;
 
 namespace IMDB_Project.Services
 {
@@ -36,10 +37,19 @@ namespace IMDB_Project.Services
             var viewModel = _serviceProvider.GetService(typeof(TViewModel)) as TViewModel;
             if (viewModel != null)
             {
-                _navigationStack.Push(viewModel);
-                // Logic to update the current view with the new ViewModel
-                //this will change the view model.
-                _mainViewModel.CurrentViewModel = viewModel;
+                //_navigationStack.Push(viewModel);
+                //// Logic to update the current view with the new ViewModel
+                ////this will change the view model.
+                //_mainViewModel.CurrentViewModel = viewModel;
+
+                object view = viewModel switch
+                {
+                    EpisodeViewModel vm => new EpisodeView(vm),
+                    // other viewmodels mapped here...
+                    _ => viewModel
+                };
+
+                _mainViewModel.CurrentViewModel = view;
             }
         }
 

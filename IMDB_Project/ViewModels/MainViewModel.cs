@@ -41,6 +41,13 @@ namespace IMDB_Project.ViewModels
         public ICommand NavigateToHomeCommand => new RelayCommand(_ => _navigationService.NavigateTo<HomeViewModel>());
         public ICommand NavigateToTitleCommand => new RelayCommand(_ => _navigationService.NavigateTo<TitleViewModel>());
 
+        //command to navigate to other view models located on the sidebar
+        public ICommand NavigateToGenreCommand => new RelayCommand(_ => _navigationService.NavigateTo<GenreViewModel>());
+        public ICommand NavigateToEpisodeCommand => new RelayCommand(_ => _navigationService.NavigateTo<EpisodeViewModel>());
+        public ICommand NavigateToCreatorCommand => new RelayCommand(_ => _navigationService.NavigateTo<CreatorViewModel>());
+        public ICommand NavigateToRatingCommand => new RelayCommand(_ => _navigationService.NavigateTo<RatingViewModel>());
+
+
 
         //command to exit
         public ICommand ExitCommand

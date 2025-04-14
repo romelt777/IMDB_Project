@@ -83,9 +83,13 @@ namespace IMDB_Project
 
                 //get instance of viewmodel classes
                 var titleViewModel = scope.ServiceProvider.GetRequiredService<TitleViewModel>();
+                var episodeViewModel = scope.ServiceProvider.GetRequiredService<EpisodeViewModel>();
+
 
                 //load data from database into viewmodel collections
                 titleViewModel.Titles = new ObservableCollection<Title>(dbContext.Titles.ToList());
+                episodeViewModel.LoadTvShowsWithEpisodes(dbContext);
+
 
 
             }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IMDB_Project"
         mc:Ignorable="d"
-        Title="IMDB Project" Height="450" Width="800">
+        Title="IMDB Project" Height="556" Width="800" ResizeMode="NoResize">
 
     <StackPanel>
         <StackPanel>
@@ -29,6 +29,16 @@
                             <Image Source="{StaticResource Home}" Width="16" Height="16" />
                         </MenuItem.Icon>-->
                     </MenuItem>
+
+
+                    <MenuItem Header="Genre" Command="{Binding NavigateToGenreCommand}">
+                    </MenuItem>
+                    <MenuItem Header="Episode" Command="{Binding NavigateToEpisodeCommand}">
+                    </MenuItem>
+                    <MenuItem Header="Directors and Writers" Command="{Binding NavigateToCreatorCommand}">
+                    </MenuItem>
+                    <MenuItem Header="Rating" Command="{Binding NavigateToRatingCommand}">
+                    </MenuItem>
                 </MenuItem>
             </Menu>
            
@@ -38,6 +48,16 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
+            <!-- Sidebar (Emojis are placeholders) -->
+            <StackPanel Grid.Column="0" Background="#2E2E2E" VerticalAlignment="Stretch">
+                <Button Content="🏠 Home" Command="{Binding NavigateToHomeCommand}" Style="{StaticResource SidebarButtonStyle}" />
+                <Button Content="🎬 Movies by Genre" Command="{Binding NavigateToGenreCommand}" Style="{StaticResource SidebarButtonStyle}" />
+                <Button Content="📺 Episodes by Show" Command="{Binding NavigateToEpisodeCommand}" Style="{StaticResource SidebarButtonStyle}" />
+                <Button Content="🎭 Works by Director/Writer" Command="{Binding NavigateToCreatorCommand}" Style="{StaticResource SidebarButtonStyle}" />
+                <Button Content="⭐ Movies by Rating" Command="{Binding NavigateToRatingCommand}" Style="{StaticResource SidebarButtonStyle}" />
+            </StackPanel>
+
 
 
             <!-- App Content Section -->

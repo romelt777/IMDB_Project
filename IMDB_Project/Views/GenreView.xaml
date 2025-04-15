@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="525" d:DesignWidth="950"
              Width="950">
-    <Grid>
+    <Grid Background="#2E2E2E" Height="467">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -22,15 +22,17 @@
         </Grid.ColumnDefinitions>
 
         <!-- Genres Section -->
-        <Grid Grid.Row="2" Grid.Column="0">
+        <Grid Grid.Row="2" Grid.Column="0" Margin="2,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Genres" Margin="5,5,5,14" Grid.Row="0"/>
+            <TextBlock Text="Genres" Margin="5,5,5,14" Grid.Row="0" Foreground="White"/>
 
             <ListView
+                Foreground="White"
+                Background="#2E2E2E"
                 Grid.Row="1"
                 MaxHeight="425"
                 HorizontalAlignment="Stretch"
@@ -41,14 +43,14 @@
         </Grid>
 
         <!-- Movies Section -->
-        <Grid Grid.Row="2" Grid.Column="1">
+        <Grid Grid.Row="2" Grid.Column="1" Margin="2,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>         
 
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="5">
-                <TextBlock Text="Movies"/>
+                <TextBlock Text="Movies" Foreground="White"/>
                 <TextBox 
                     Width="150"
                     Height="25"
@@ -58,6 +60,8 @@
 
 
             <ListView
+                Foreground="White"
+                Background="#2E2E2E"
                 MaxWidth="400"
                 MaxHeight="425"
                 Grid.Row="1"
@@ -75,7 +79,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Movie Details" Margin="5,5,5,10" Grid.Row="0"/>
+            <TextBlock Text="Movie Details" Margin="5,5,5,10" Grid.Row="0" Foreground="White"/>
 
             <!-- Content goes here -->
             <StackPanel Grid.Row="1">
@@ -86,8 +90,8 @@
                 </StackPanel>-->
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Release year:" FontWeight="Bold" Margin="5,0,3,0"/>
-                    <TextBlock Text="{Binding SelectedMovie.StartYear}"/>
+                    <TextBlock Text="Release year:" FontWeight="Bold" Margin="5,0,3,0" Foreground="White"/>
+                    <TextBlock Text="{Binding SelectedMovie.StartYear}" Foreground="White"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

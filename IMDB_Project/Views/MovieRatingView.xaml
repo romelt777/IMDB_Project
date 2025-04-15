@@ -14,11 +14,11 @@
         </Grid.RowDefinitions>
 
         <!--header-->
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <TextBlock Text="Movie Ratings" Style="{StaticResource subHeaderStyle}"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Background="#2E2E2E">
+            <TextBlock Text="Movie Ratings" Style="{StaticResource subHeaderStyle}" Foreground="White"/>
 
             <!--search bar-->
-            <Label Style="{StaticResource searchLabelStyle}">Search Titles:</Label>
+            <Label Style="{StaticResource searchLabelStyle}" Foreground="White">Search Titles:</Label>
             <TextBox 
             Margin="10" 
             Width="300" HorizontalAlignment="Left"
@@ -35,7 +35,9 @@
                       CanUserAddRows="False" 
                       CanUserDeleteRows="False" 
                       Style="{StaticResource TransparentDataGridStyle}"
-                       Height="500">
+                       Height="500"
+                      Foreground="White"
+                      Background="#2E2E2E">
                 <DataGrid.Columns>
                     <!--Title-->
                     <DataGridTextColumn Binding="{Binding Title.PrimaryTitle}" FontSize="16" Width="300">
@@ -56,7 +58,7 @@
                     </DataGridTextColumn>
 
                     <!--Number of votes-->
-                    <DataGridTextColumn Binding="{Binding NumVotes}" FontSize="16" Width="450">
+                    <DataGridTextColumn Binding="{Binding NumVotes}" FontSize="16" Width="150">
                         <DataGridTextColumn.Header>
                             <StackPanel >
                                 <TextBlock Text="# of Votes" Style="{StaticResource DataGridHeaderStyleRating}"/>

@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:IMDB_Project.Views"
              mc:Ignorable="d"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Foreground="White"
+             Background="#2E2E2E">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -23,12 +25,14 @@
                VerticalAlignment="Center"
                Command="{Binding ToggleSortingCommand}"/>
         </StackPanel>
-        <ScrollViewer Grid.Row="2"
+        <ScrollViewer Grid.Row="2" Margin="3,0,0,0"
                         Height="400"
                    VerticalScrollBarVisibility="Auto"
                    ScrollChanged="ScrollViewer_ScrollChanged">
             <ListView ItemsSource="{Binding TvShows}"
-                   ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                   ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                       Foreground="White"
+                        Background="#2E2E2E">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="10">

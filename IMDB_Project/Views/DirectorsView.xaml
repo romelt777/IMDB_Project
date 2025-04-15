@@ -11,6 +11,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+
         </Grid.RowDefinitions>
 
         <!--header-->
@@ -26,13 +28,22 @@
             Style="{StaticResource SearchStyle}" />
         </StackPanel>
 
-        <ScrollViewer Grid.Row="2"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <DataGrid ItemsSource="{Binding FilteredDirectors}" 
+
+        <!-- Pagination Controls -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Previous" Command="{Binding PreviousPageCommand}" 
+                    Width="100" Height="20" Margin="5" IsEnabled="{Binding CanNavigatePrevious}"/>
+            <TextBlock Text="{Binding CurrentPageDisplay}" VerticalAlignment="Center" Margin="10,0"/>
+            <Button Content="Next" Command="{Binding NextPageCommand}" 
+                    Width="100" Height="20" Margin="5" IsEnabled="{Binding CanNavigateNext}"/>
+        </StackPanel>
+
+            <DataGrid Grid.Row="3"  ItemsSource="{Binding FilteredDirectors}" 
                       AutoGenerateColumns="False" 
                       CanUserAddRows="False" 
                       CanUserDeleteRows="False" 
                       Style="{StaticResource TransparentDataGridStyle}"
-                       Height="500">
+                       Height="300">
                 <DataGrid.Columns>
                     <!--Director Name-->
                     <DataGridTextColumn Binding="{Binding PrimaryName}" FontSize="16" Width="200">
@@ -58,6 +69,6 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </ScrollViewer>
+
     </Grid>
 </UserControl>

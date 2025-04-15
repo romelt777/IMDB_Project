@@ -15,7 +15,7 @@ namespace IMDB_Project.ViewModels
 
         //for search
         private string _searchQuery;
-        private ObservableCollection<Title> _filteredTitles;
+        private ObservableCollection<Rating> _filteredRatings;
 
 
         public ObservableCollection<Rating> MovieRatings
@@ -25,16 +25,17 @@ namespace IMDB_Project.ViewModels
             {
                 _movieRatings = value;
                 OnPropertyChanged(nameof(MovieRatings));
+                FilterRatings();
             }
         }
 
-        public ObservableCollection<Title> FilteredTitles
+        public ObservableCollection<Rating> FilteredRatings
         {
-            get { return _filteredTitles; }
+            get { return _filteredRatings; }
             private set
             {
-                _filteredTitles = value;
-                OnPropertyChanged(nameof(FilteredTitles));
+                _filteredRatings = value;
+                OnPropertyChanged(nameof(FilteredRatings));
             }
         }
 
@@ -47,27 +48,27 @@ namespace IMDB_Project.ViewModels
                 {
                     _searchQuery = value;
                     OnPropertyChanged(nameof(SearchQuery));
-                    //FilterTitles();
+                    FilterRatings();
                 }
             }
         }
 
 
 
-        ////Filtering Title after search
-        //private void FilterTitles()
-        //{
-        //    if (string.IsNullOrEmpty(SearchQuery))
-        //    {
-        //        FilteredTitles = new ObservableCollection<Title>(Titles);
-        //    }
-        //    else
-        //    {
-        //        FilteredTitles = new ObservableCollection<Title>(
-        //            Titles.Where(a => a.PrimaryTitle.ToLower().Contains(SearchQuery.ToLower()))
-        //        );
-        //    }
-        //}
+        //Filtering Title after search
+        private void FilterRatings()
+        {
+            if (string.IsNullOrEmpty(SearchQuery))
+            {
+                FilteredRatings = new ObservableCollection<Rating>(MovieRatings);
+            }
+            else
+            {
+                FilteredRatings = new ObservableCollection<Rating>(
+                    MovieRatings.Where(a => a.Title.PrimaryTitle.ToLower().Contains(SearchQuery.ToLower()))
+                );
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(string propertyName)

@@ -9,6 +9,7 @@ using Data;
 using System.DirectoryServices;
 using Models;
 using System.Collections.ObjectModel;
+using IMDB_Project.Models.Generated;
 
 namespace IMDB_Project
 {
@@ -65,6 +66,10 @@ namespace IMDB_Project
             serviceCollection.AddSingleton<TitleViewModel>();
             serviceCollection.AddSingleton<MovieRatingViewModel>();
             serviceCollection.AddSingleton<DirectorsViewModel>();
+            serviceCollection.AddSingleton<GenreViewModel>();
+            serviceCollection.AddSingleton<MovieViewModel>();
+            serviceCollection.AddSingleton<MovieGenreViewModel>();
+            serviceCollection.AddSingleton<TitleGenreViewModel>();
         }
 
         private void LoadData()
@@ -79,13 +84,22 @@ namespace IMDB_Project
                 var titleViewModel = scope.ServiceProvider.GetRequiredService<TitleViewModel>();
                 var movieRatingViewModel = scope.ServiceProvider.GetRequiredService<MovieRatingViewModel>();
                 var directorsViewModel = scope.ServiceProvider.GetRequiredService<DirectorsViewModel>();
+                var genreViewModel = scope.ServiceProvider.GetRequiredService<GenreViewModel>();
+                var movieViewModel = scope.ServiceProvider.GetRequiredService<MovieViewModel>();
+                var movieGenreViewModel = scope.ServiceProvider.GetRequiredService<MovieGenreViewModel>();
+                var titleGenreViewModel = scope.ServiceProvider.GetRequiredService<TitleGenreViewModel>();
 
                 //load data from database into viewmodel collections
                 titleViewModel.Titles = new ObservableCollection<Title>(dbContext.Titles.ToList());
                 movieRatingViewModel.MovieRatings = new ObservableCollection<Rating>(dbContext.Ratings.ToList());
                 //directorsViewModel.Directors = new ObservableCollection<Name>(dbContext.Names.ToList());
                 directorsViewModel.Directors = new ObservableCollection<Name>(dbContext.Names.Take(100).ToList());
-
+                genreViewModel.Genres = new ObservableCollection<Genre>(dbContext.Genres.ToList());
+                movieViewModel.Movies = new ObservableCollection<Title>(dbContext.Titles.Where(a => a.TitleType == "movie").ToList());
+                titleGenreViewModel.TitlesAndGenres = new ObservableCollection<TitleGenre>(dbContext.TitleGenres.ToList());
+                movieGenreViewModel.GenreViewModel = genreViewModel;
+                movieGenreViewModel.MovieViewModel = movieViewModel;
+                movieGenreViewModel._titleGenreViewModel = titleGenreViewModel;
             }
 
         }

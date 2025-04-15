@@ -83,8 +83,12 @@ namespace IMDB_Project
                 //load data from database into viewmodel collections
                 titleViewModel.Titles = new ObservableCollection<Title>(dbContext.Titles.ToList());
                 movieRatingViewModel.MovieRatings = new ObservableCollection<Rating>(dbContext.Ratings.ToList());
-                //directorsViewModel.Directors = new ObservableCollection<Name>(dbContext.Names.ToList());
-                directorsViewModel.Directors = new ObservableCollection<Name>(dbContext.Names.Take(100).ToList());
+
+                directorsViewModel.SetDbContext(dbContext);
+
+                //Initialize pagination 
+                directorsViewModel.CurrentPage = 1;
+                directorsViewModel.LoadDirectorsPage();
 
             }
 

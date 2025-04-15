@@ -16,17 +16,15 @@ public partial class ImdbContext : DbContext
     {
     }
 
-    public virtual DbSet<Director> Directors { get; set; }
-
     public virtual DbSet<Episode> Episodes { get; set; }
 
     public virtual DbSet<Genre> Genres { get; set; }
 
+    public virtual DbSet<Name> Names { get; set; }
+
     public virtual DbSet<Rating> Ratings { get; set; }
 
     public virtual DbSet<Title> Titles { get; set; }
-
-    public virtual DbSet<Writer> Writers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -34,13 +32,6 @@ public partial class ImdbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Director>(entity =>
-        {
-            entity.HasOne(d => d.Title).WithMany(p => p.Directors)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Directors_Titles1");
-        });
-
         modelBuilder.Entity<Episode>(entity =>
         {
             entity.HasOne(d => d.ParentTitle).WithMany(p => p.EpisodeParentTitles).HasConstraintName("FK_Episodes_Titles1");
@@ -62,11 +53,57 @@ public partial class ImdbContext : DbContext
                 .HasConstraintName("FK_Ratings_Titles");
         });
 
-        modelBuilder.Entity<Writer>(entity =>
+        modelBuilder.Entity<Title>(entity =>
         {
-            entity.HasOne(d => d.Title).WithMany(p => p.Writers)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Writers_Titles");
+            entity.HasMany(d => d.Names).WithMany(p => p.Titles)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Director",
+                    r => r.HasOne<Name>().WithMany()
+                        .HasForeignKey("NameId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_Directors_Names"),
+                    l => l.HasOne<Title>().WithMany()
+                        .HasForeignKey("TitleId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_Directors_Titles1"),
+                    j =>
+                    {
+                        j.HasKey("TitleId", "NameId");
+                        j.ToTable("Directors");
+                        j.IndexerProperty<string>("TitleId")
+                            .HasMaxLength(10)
+                            .IsUnicode(false)
+                            .HasColumnName("titleID");
+                        j.IndexerProperty<string>("NameId")
+                            .HasMaxLength(10)
+                            .IsUnicode(false)
+                            .HasColumnName("nameID");
+                    });
+
+            entity.HasMany(d => d.NamesNavigation).WithMany(p => p.TitlesNavigation)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Writer",
+                    r => r.HasOne<Name>().WithMany()
+                        .HasForeignKey("NameId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_Writers_Names"),
+                    l => l.HasOne<Title>().WithMany()
+                        .HasForeignKey("TitleId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_Writers_Titles"),
+                    j =>
+                    {
+                        j.HasKey("TitleId", "NameId");
+                        j.ToTable("Writers");
+                        j.IndexerProperty<string>("TitleId")
+                            .HasMaxLength(10)
+                            .IsUnicode(false)
+                            .HasColumnName("titleID");
+                        j.IndexerProperty<string>("NameId")
+                            .HasMaxLength(10)
+                            .IsUnicode(false)
+                            .HasColumnName("nameID");
+                    });
         });
 
         OnModelCreatingPartial(modelBuilder);

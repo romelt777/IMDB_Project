@@ -41,9 +41,6 @@ public partial class Title
     [Column("runtimeMinutes")]
     public short? RuntimeMinutes { get; set; }
 
-    [InverseProperty("Title")]
-    public virtual ICollection<Director> Directors { get; set; } = new List<Director>();
-
     [InverseProperty("ParentTitle")]
     public virtual ICollection<Episode> EpisodeParentTitles { get; set; } = new List<Episode>();
 
@@ -53,6 +50,11 @@ public partial class Title
     [InverseProperty("Title")]
     public virtual Rating? Rating { get; set; }
 
-    [InverseProperty("Title")]
-    public virtual ICollection<Writer> Writers { get; set; } = new List<Writer>();
+    [ForeignKey("TitleId")]
+    [InverseProperty("Titles")]
+    public virtual ICollection<Name> Names { get; set; } = new List<Name>();
+
+    [ForeignKey("TitleId")]
+    [InverseProperty("TitlesNavigation")]
+    public virtual ICollection<Name> NamesNavigation { get; set; } = new List<Name>();
 }

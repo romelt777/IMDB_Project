@@ -64,6 +64,7 @@ namespace IMDB_Project
             serviceCollection.AddSingleton<HomeViewModel>();
             serviceCollection.AddSingleton<TitleViewModel>();
             serviceCollection.AddSingleton<MovieRatingViewModel>();
+            serviceCollection.AddSingleton<DirectorsViewModel>();
         }
 
         private void LoadData()
@@ -77,11 +78,13 @@ namespace IMDB_Project
                 //get instance of viewmodel classes
                 var titleViewModel = scope.ServiceProvider.GetRequiredService<TitleViewModel>();
                 var movieRatingViewModel = scope.ServiceProvider.GetRequiredService<MovieRatingViewModel>();
+                var directorsViewModel = scope.ServiceProvider.GetRequiredService<DirectorsViewModel>();
 
                 //load data from database into viewmodel collections
                 titleViewModel.Titles = new ObservableCollection<Title>(dbContext.Titles.ToList());
                 movieRatingViewModel.MovieRatings = new ObservableCollection<Rating>(dbContext.Ratings.ToList());
-
+                //directorsViewModel.Directors = new ObservableCollection<Name>(dbContext.Names.ToList());
+                directorsViewModel.Directors = new ObservableCollection<Name>(dbContext.Names.Take(100).ToList());
 
             }
 

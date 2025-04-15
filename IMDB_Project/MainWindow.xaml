@@ -25,14 +25,10 @@
                         </MenuItem.Icon>-->
                     </MenuItem>
                     <MenuItem Header="Title" Command="{Binding NavigateToTitleCommand}">
-                        <!--<MenuItem.Icon>
-                            <Image Source="{StaticResource Home}" Width="16" Height="16" />
-                        </MenuItem.Icon>-->
                     </MenuItem>
                     <MenuItem Header="Movie Ratings" Command="{Binding NavigateToMovieRatingCommand}">
-                        <!--<MenuItem.Icon>
-                            <Image Source="{StaticResource Home}" Width="16" Height="16" />
-                        </MenuItem.Icon>-->
+                    </MenuItem>
+                    <MenuItem Header="Directors" Command="{Binding NavigateToDirectorsCommand}">
                     </MenuItem>
                 </MenuItem>
             </Menu>

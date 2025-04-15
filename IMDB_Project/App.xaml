@@ -23,12 +23,13 @@
                 <views:HomeView></views:HomeView>
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:TitleViewModel}">
-                <!--when app gets homeViewModel, show homeView-->
                 <views:TitleView></views:TitleView>
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:MovieRatingViewModel}">
-                <!--when app gets homeViewModel, show homeView-->
                 <views:MovieRatingView></views:MovieRatingView>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:DirectorsViewModel}">
+                <views:DirectorsView></views:DirectorsView>
             </DataTemplate>
 
         </ResourceDictionary>

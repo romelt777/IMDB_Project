@@ -92,8 +92,15 @@ namespace IMDB_Project
                 //load data from database into viewmodel collections
                 titleViewModel.Titles = new ObservableCollection<Title>(dbContext.Titles.ToList());
                 movieRatingViewModel.MovieRatings = new ObservableCollection<Rating>(dbContext.Ratings.ToList());
-                //directorsViewModel.Directors = new ObservableCollection<Name>(dbContext.Names.ToList());
-                directorsViewModel.Directors = new ObservableCollection<Name>(dbContext.Names.Take(100).ToList());
+                var directorIds = dbContext.Names
+                    .FromSqlRaw("SELECT DISTINCT nameID FROM Directors")
+                    .Select(n => n.NameId)
+                    .ToList();
+                var directorNames = dbContext.Names
+                    .Where(n => directorIds.Contains(n.NameId))
+                    .Take(100)
+                    .ToList();
+                directorsViewModel.Directors = new ObservableCollection<Name>(directorNames);
                 genreViewModel.Genres = new ObservableCollection<Genre>(dbContext.Genres.ToList());
                 movieViewModel.Movies = new ObservableCollection<Title>(dbContext.Titles.Where(a => a.TitleType == "movie").ToList());
                 titleGenreViewModel.TitlesAndGenres = new ObservableCollection<TitleGenre>(dbContext.TitleGenres.ToList());

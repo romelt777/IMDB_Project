@@ -34,13 +34,16 @@ namespace IMDB_Projects.Tests
             _titleGenreVM = new TitleGenreViewModel();
             _titleVM = new TitleViewModel();
             _context = new ImdbContext();
+            _movieGenreVM.GenreViewModel = _genreVM;
+            _movieGenreVM.MovieViewModel = _movieVM;
+            _movieGenreVM._titleGenreViewModel = _titleGenreVM;
         }
 
 #region Filter by search methods
         [STATestMethod]
         public void FilterGenres_ValidSearch_ExpectedResult()
         {
-            _genreVM.Genres = new ObservableCollection<Genre>(_context.Genres.ToList());
+            _genreVM.Genres = new ObservableCollection<Genre>(_context.Genres);
             Debug.WriteLine(_context.Genres.ToList().Count());
             _genreVM.SearchQuery = "e";
             var numOfFilteredGenres = _genreVM.FilteredGenres.Count();
@@ -60,8 +63,7 @@ namespace IMDB_Projects.Tests
         [STATestMethod]
         public void FilterTitle_ValidSearch_ExpectedResult()
         {
-            _titleVM.Titles = new ObservableCollection<Title>(_context.Titles.ToList());
-            Debug.WriteLine(_context.Titles.ToList().Count());
+            _titleVM.Titles = new ObservableCollection<Title>(_context.Titles);
             _titleVM.SearchQuery = "am";
             var numOfFilteredTitles = _titleVM.FilteredTitles.Count();
             var count = 0;
@@ -80,8 +82,7 @@ namespace IMDB_Projects.Tests
         [STATestMethod]
         public void FilterMovieRatings_ValidSearch_ExpectedResult()
         {
-            _movieRatingVM.MovieRatings = new ObservableCollection<Rating>(_context.Ratings.Include(r => r.Title).ToList());
-            Debug.WriteLine(_context.Ratings.ToList().Count());
+            _movieRatingVM.MovieRatings = new ObservableCollection<Rating>(_context.Ratings.Include(r => r.Title));
             _movieRatingVM.SearchQuery = "am";
             var numOfFilteredRatings = _movieRatingVM.FilteredRatings.Count();
             var count = 0;
@@ -96,7 +97,37 @@ namespace IMDB_Projects.Tests
             Debug.WriteLine(count);
             Assert.AreEqual(numOfFilteredRatings, count);
         }
+        #endregion
 
+        [STATestMethod]
+        public void FilterMovieByGenre_SelectedGenreFromList_ExpectedResult()
+        {
+            _genreVM.Genres = new ObservableCollection<Genre>(_context.Genres);
+            _movieVM.Movies = new ObservableCollection<Title>(_context.Titles.Where(t => t.TitleType == "movie"));
+            _titleGenreVM.TitlesAndGenres = new ObservableCollection<TitleGenre>(_context.TitleGenres);
+
+            var validGenre = new Genre
+            {
+                GenreId = 2,
+                Name = "Documentary"
+            };
+
+            _movieGenreVM.SelectedGenre = validGenre;
+            var genreMatches = _titleGenreVM.TitlesAndGenres
+                .Where(tg => tg.GenreId == validGenre.GenreId);
+
+            var filteredMoviesLength = _movieVM.FilteredMovies.Count();
+            var count = 0;
+
+            foreach (var movie in _movieVM.FilteredMovies)
+            {
+                if (genreMatches.Any(g => g.TitleId == movie.TitleId))
+                {
+                    count++;
+                }
+            }
+            Debug.WriteLine(count);
+            Assert.AreEqual(filteredMoviesLength, count);
+        }
     }
 }
-#endregion

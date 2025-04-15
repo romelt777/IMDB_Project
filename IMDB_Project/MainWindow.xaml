@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IMDB_Project"
         mc:Ignorable="d"
-        Title="IMDB Project" Height="450" Width="800">
+        Title="IMDB Project" Height="525" Width="950">
 
     <StackPanel>
         <StackPanel>
@@ -32,6 +32,8 @@
                     </MenuItem>
                     <MenuItem Header="Genre" Command="{Binding NavigateToGenreCommand}">                       
                     </MenuItem>
+                    <MenuItem Header="Episode" Command="{Binding NavigateToEpisodeCommand}">
+                     </MenuItem>
                 </MenuItem>
             </Menu>
            
@@ -42,6 +44,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
+            <StackPanel Grid.Column="0" Background="#2E2E2E" VerticalAlignment="Stretch">
+                <Button Content="🏠 Home" Command="{Binding NavigateToHomeCommand}" Style="{StaticResource SidebarButtonStyle}" HorizontalAlignment="Left" />
+                <Button Content="🎬 Movies by Genre" Command="{Binding NavigateToGenreCommand}" Style="{StaticResource SidebarButtonStyle}" HorizontalAlignment="Left" />
+                <Button Content="📺 Episodes by Show" Command="{Binding NavigateToEpisodeCommand}" Style="{StaticResource SidebarButtonStyle}" HorizontalAlignment="Left"/>
+                <Button Content="🎭 Works by Director/Writer" Command="{Binding NavigateToDirectorsCommand}" Style="{StaticResource SidebarButtonStyle}" HorizontalAlignment="Left"/>
+                <Button Content="⭐ Movies by Rating" Command="{Binding NavigateToMovieRatingCommand}" Style="{StaticResource SidebarButtonStyle}" HorizontalAlignment="Left"/>
+            </StackPanel>
 
             <!-- App Content Section -->
             <StackPanel  Grid.Column="1">

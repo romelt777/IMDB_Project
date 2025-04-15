@@ -18,6 +18,10 @@ namespace IMDB_Project.Commands
             _canExecute = canExecute;
         }
 
+        public RelayCommand(Action execute, Predicate<object> canExecute = null)
+    : this(_ => execute(), canExecute)
+        {
+        }
         public bool CanExecute(object parameter)
         {
             return _canExecute == null || _canExecute(parameter);

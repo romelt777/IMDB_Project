@@ -40,7 +40,7 @@ namespace IMDB_Project.ViewModels
         //pass in the view model to navigate to
         public ICommand NavigateToHomeCommand => new RelayCommand(_ => _navigationService.NavigateTo<HomeViewModel>());
         public ICommand NavigateToTitleCommand => new RelayCommand(_ => _navigationService.NavigateTo<TitleViewModel>());
-
+        public ICommand NavigateToMovieRatingCommand => new RelayCommand(_ => _navigationService.NavigateTo<MovieRatingViewModel>());
 
         //command to exit
         public ICommand ExitCommand

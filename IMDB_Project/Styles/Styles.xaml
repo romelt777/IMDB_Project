@@ -71,7 +71,7 @@
 
 
     <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
-    <!--Title PAGE / HOME VIEW / ETC -->
+    <!--Title PAGE  -->
     <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 
     <!-- Style for the album list box column header -->
@@ -126,6 +126,17 @@
     </Style>
 
 
+    <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+    <!--Rating PAGE  -->
+    <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+    <!-- Style for  column header -->
+    <Style x:Key="DataGridHeaderStyleRating" TargetType="TextBlock">
+        <Setter Property="Width" Value="200" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10,0,0,0" />
+        <Setter Property="FontSize" Value="24" />
+    </Style>
 
 
 

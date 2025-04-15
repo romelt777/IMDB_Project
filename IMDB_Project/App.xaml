@@ -25,6 +25,12 @@
             <DataTemplate DataType="{x:Type vm:TitleViewModel}">
                 <!--when app gets homeViewModel, show homeView-->
                 <views:TitleView></views:TitleView>
-            </DataTemplate>        </ResourceDictionary>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MovieRatingViewModel}">
+                <!--when app gets homeViewModel, show homeView-->
+                <views:MovieRatingView></views:MovieRatingView>
+            </DataTemplate>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

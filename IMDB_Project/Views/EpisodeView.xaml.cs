@@ -16,14 +16,28 @@ using System.Windows.Shapes;
 
 namespace IMDB_Project.Views
 {
-    public partial class EpisodeView :UserControl
+    public partial class EpisodeView : UserControl
     {
         public EpisodeView(EpisodeViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
         }
+        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            var scrollViewer = sender as ScrollViewer;
+            if (scrollViewer != null &&
+                scrollViewer.VerticalOffset == scrollViewer.ScrollableHeight &&
+                DataContext is EpisodeViewModel viewModel)
+            {
+                viewModel.LoadMore();
+            }
+        }
     }
+
+
+   
+    
 }
 
 

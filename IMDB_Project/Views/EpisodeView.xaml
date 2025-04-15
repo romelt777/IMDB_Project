@@ -4,6 +4,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
+     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+
       >
 
     <Grid>
@@ -11,31 +13,37 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20">
-            <TextBlock Text="Episodes by Show"
+  <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20">
+      <TextBlock Text="Episodes by Show"
                  FontSize="28"
                  FontWeight="Bold"
                  VerticalAlignment="Center"
                  Margin="0,0,10,0"/>
-            <Button Content="Toggle Sorting"
+      <Button Content="Toggle Sorting"
               VerticalAlignment="Center"
               Command="{Binding ToggleSortingCommand}"/>
-        </StackPanel>
-
-        <ListView Grid.Row="1"
-                  ItemsSource="{Binding TvShows}" d:ItemsSource="{d:SampleData ItemCount=5}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="10">
-                        <TextBlock Text="{Binding Title.PrimaryTitle}" FontWeight="Bold" FontSize="16"/>
-                        <TextBlock>
-                            <Run Text="Episodes: "/>
-                            <Run Text="{Binding EpisodeCount}"/>
-                        </TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+  </StackPanel>
+        <ScrollViewer Grid.Row="2"
+                       Height="400"
+                  VerticalScrollBarVisibility="Auto"
+                  ScrollChanged="ScrollViewer_ScrollChanged">
+            <ListView ItemsSource="{Binding TvShows}"
+                  ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="10">
+                            <TextBlock Text="{Binding Title.PrimaryTitle}" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"/>
+                            <TextBlock>
+                            <Run Text="Episodes: " />
+                            <Run Text="{Binding EpisodeCount}" />
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
     </Grid>
 </UserControl>
 

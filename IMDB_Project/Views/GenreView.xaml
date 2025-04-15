@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="IMDB_Project.Views.GenreView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IMDB_Project.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="7*" />
+            <!-- New column for Movie Details -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Genres Section -->
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Genres" Margin="5" Grid.Row="0"/>
+
+            <ListView
+                Grid.Row="1"
+                MaxHeight="425"
+                HorizontalAlignment="Stretch"
+                ItemsSource="{Binding GenreViewModel.Genres}"
+                SelectedItem="{Binding SelectedGenre, UpdateSourceTrigger=PropertyChanged}"
+                DisplayMemberPath="Name"
+                ScrollViewer.VerticalScrollBarVisibility="Auto" />
+        </Grid>
+
+        <!-- Movies Section -->
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Movies" Margin="5" Grid.Row="0"/>
+
+            <ListView
+                MaxWidth="400"
+                MaxHeight="425"
+                Grid.Row="1"
+                HorizontalAlignment="Stretch"
+                ItemsSource="{Binding MovieViewModel.FilteredMovies}"
+                SelectedItem="{Binding SelectedMovie, UpdateSourceTrigger=PropertyChanged}"
+                DisplayMemberPath="PrimaryTitle"
+                ScrollViewer.VerticalScrollBarVisibility="Auto" />
+        </Grid>
+
+        <!-- Movie Details Section (Skeleton) -->
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Movie Details" Margin="5" Grid.Row="0"/>
+
+            <!-- Content goes here -->
+            <StackPanel Grid.Row="1">
+                <!--<StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Length" FontWeight="Bold" Margin="0,0,3,0"/>
+                    <TextBlock Text="{Binding SelectedMovie.OriginalTitle}"/>
+                    <TextBlock Text="min"/>
+                </StackPanel>-->
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Release year:" FontWeight="Bold" Margin="0,0,3,0"/>
+                    <TextBlock Text="{Binding SelectedMovie.StartYear}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IMDB_Project.Models.Generated;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
@@ -25,6 +26,7 @@ public partial class ImdbContext : DbContext
     public virtual DbSet<Rating> Ratings { get; set; }
 
     public virtual DbSet<Title> Titles { get; set; }
+    public virtual DbSet<TitleGenre> TitleGenres { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -51,6 +53,19 @@ public partial class ImdbContext : DbContext
             entity.HasOne(d => d.Title).WithOne(p => p.Rating)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Ratings_Titles");
+        });
+
+        modelBuilder.Entity<TitleGenre>(entity =>
+        {
+            entity.HasKey(e => new { e.TitleId, e.GenreId }).HasName("PK_Title_Genres_1");
+
+            entity.ToTable("Title_Genres");
+
+            entity.Property(e => e.TitleId)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("titleID");
+            entity.Property(e => e.GenreId).HasColumnName("genreID");
         });
 
         modelBuilder.Entity<Title>(entity =>

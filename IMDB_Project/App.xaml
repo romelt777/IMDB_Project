@@ -31,6 +31,9 @@
             <DataTemplate DataType="{x:Type vm:DirectorsViewModel}">
                 <views:DirectorsView></views:DirectorsView>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MovieGenreViewModel}">
+                <views:GenreView></views:GenreView>
+            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

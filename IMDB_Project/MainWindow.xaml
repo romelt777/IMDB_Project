@@ -30,6 +30,8 @@
                     </MenuItem>
                     <MenuItem Header="Directors" Command="{Binding NavigateToDirectorsCommand}">
                     </MenuItem>
+                    <MenuItem Header="Genre" Command="{Binding NavigateToGenreCommand}">                       
+                    </MenuItem>
                 </MenuItem>
             </Menu>
            

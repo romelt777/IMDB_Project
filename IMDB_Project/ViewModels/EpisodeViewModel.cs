@@ -8,6 +8,8 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using IMDB_Project.Commands;
 
 namespace IMDB_Project.ViewModels
 {
@@ -15,6 +17,12 @@ namespace IMDB_Project.ViewModels
     public partial class EpisodeViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<TvShowWithEpisodeCount> _tvShows;
+        private bool _isSortedDescending = true;
+        public ICommand ToggleSortingCommand { get; }
+        public EpisodeViewModel()
+        {
+            ToggleSortingCommand = new RelayCommand(ToggleSorting);
+        }
 
         public ObservableCollection<TvShowWithEpisodeCount> TvShows
         {
@@ -47,6 +55,26 @@ namespace IMDB_Project.ViewModels
                 Console.WriteLine($"{s.Title.PrimaryTitle}: {s.EpisodeCount} episodes");
             }
         }
+        public void ToggleSorting()
+        {
+            _isSortedDescending = !_isSortedDescending;
+            UpdateSorting(TvShows.ToList());
+        }
+
+        private void UpdateSorting(List<TvShowWithEpisodeCount> shows)
+        {
+            if (_isSortedDescending)
+            {
+                TvShows = new ObservableCollection<TvShowWithEpisodeCount>(
+                    shows.OrderByDescending(s => s.EpisodeCount));
+            }
+            else
+            {
+                TvShows = new ObservableCollection<TvShowWithEpisodeCount>(
+                    shows.OrderBy(s => s.EpisodeCount));
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {

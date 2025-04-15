@@ -11,16 +11,19 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <TextBlock Text="Episodes by Show"
-                   Grid.Row="0"
-                   FontSize="28"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   Margin="0,20,0,20"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20">
+            <TextBlock Text="Episodes by Show"
+                 FontSize="28"
+                 FontWeight="Bold"
+                 VerticalAlignment="Center"
+                 Margin="0,0,10,0"/>
+            <Button Content="Toggle Sorting"
+              VerticalAlignment="Center"
+              Command="{Binding ToggleSortingCommand}"/>
+        </StackPanel>
 
         <ListView Grid.Row="1"
-                  ItemsSource="{Binding TvShows}">
+                  ItemsSource="{Binding TvShows}" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="10">

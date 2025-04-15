@@ -19,6 +19,7 @@ namespace IMDB_Projects.Tests
         private MovieViewModel _movieVM;
         private TitleGenreViewModel _titleGenreVM;
         private TitleViewModel _titleVM;
+        private EpisodeViewModel _episodeVM;
         private ImdbContext _context;
 
         [STATestMethod]
@@ -33,6 +34,7 @@ namespace IMDB_Projects.Tests
             _movieRatingVM = new MovieRatingViewModel();
             _titleGenreVM = new TitleGenreViewModel();
             _titleVM = new TitleViewModel();
+            _episodeVM = new EpisodeViewModel();
             _context = new ImdbContext();
             _movieGenreVM.GenreViewModel = _genreVM;
             _movieGenreVM.MovieViewModel = _movieVM;
@@ -98,6 +100,16 @@ namespace IMDB_Projects.Tests
             Assert.AreEqual(numOfFilteredRatings, count);
         }
         #endregion
+        [STATestMethod]
+        public void FilterMovies_ValidSearch_ExpectedResult()
+        {
+            _movieVM.Movies = new ObservableCollection<Title>(_context.Titles.Where(t => t.TitleType == "movie"));
+            _movieGenreVM.SearchQuery = "am";
+            _movieGenreVM.FilterMoviesBySearchQuery();
+            var numOfFilteredMovies = _movieVM.FilteredMovies.Count();
+            var manualFilterBySearch = _movieVM.Movies.Where(m => m.PrimaryTitle.ToLower().Contains(_movieGenreVM.SearchQuery.ToLower()));
+            Assert.AreEqual(numOfFilteredMovies, manualFilterBySearch.Count());
+        }
 
         [STATestMethod]
         public void FilterMovieByGenre_SelectedGenreFromList_ExpectedResult()
@@ -128,6 +140,28 @@ namespace IMDB_Projects.Tests
             }
             Debug.WriteLine(count);
             Assert.AreEqual(filteredMoviesLength, count);
+        }
+
+        //help from ChatGPT
+        [STATestMethod]
+        public void FilterEpisodes_ByToggling_ExpectedResult()
+        {
+            _episodeVM.LoadTvShowsWithEpisodes(_context);
+            var initialList = _episodeVM.TvShows.ToList();
+
+            _episodeVM.ToggleSorting();
+            var ascendingList = _episodeVM.TvShows.ToList();
+
+            _episodeVM.ToggleSorting();
+            var descendingList = _episodeVM.TvShows.ToList();
+
+            Assert.IsTrue(ascendingList.SequenceEqual(ascendingList.OrderBy(s => s.EpisodeCount)));
+            Assert.IsTrue(descendingList.SequenceEqual(descendingList.OrderByDescending(s => s.EpisodeCount)));
+
+            if (ascendingList.Count > 1)
+            {
+                Assert.AreNotEqual(ascendingList.First().EpisodeCount, descendingList.First().EpisodeCount);
+            }
         }
     }
 }

@@ -60,7 +60,7 @@ namespace IMDB_Project.ViewModels
         {
             if (!string.IsNullOrEmpty(SearchQuery))
             {
-                _movieViewModel.FilteredMovies = new ObservableCollection<Title>(_movieViewModel.Movies.Where(m => m.OriginalTitle.Contains(SearchQuery)));
+                _movieViewModel.FilteredMovies = new ObservableCollection<Title>(_movieViewModel.Movies.Where(m => m.PrimaryTitle.ToLower().Contains(SearchQuery.ToLower())));
             }
             else
             {

@@ -10,8 +10,17 @@
     <UserControl.DataContext>
         <vm:HomeViewModel/>
     </UserControl.DataContext>
-    <Grid>
-        <TextBlock>IMBD_PROJECT HOME PAGE</TextBlock>
+    <Grid Background="#2E2E2E" Height="475">
+        <!-- Define two rows, one for the first TextBlock, another for the second -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
 
+        <!-- First TextBlock (Welcome Message) -->
+        <TextBlock Grid.Row="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,20">Welcome to the IMDB Project Home Page!</TextBlock>
+
+        <!-- Second TextBlock (Instructions) -->
+        <TextBlock Grid.Row="1" FontSize="22" HorizontalAlignment="Center" Foreground="White" TextWrapping="Wrap">Click a sidebar item or a page to get started</TextBlock>
     </Grid>
 </UserControl>

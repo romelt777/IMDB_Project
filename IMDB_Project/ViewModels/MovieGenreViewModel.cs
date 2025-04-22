@@ -17,6 +17,8 @@ namespace IMDB_Project.ViewModels
         public TitleGenreViewModel _titleGenreViewModel;
         private Genre _selectedGenre;
         private Title _selectedMovie;
+        private string _searchQuery;
+
         public GenreViewModel GenreViewModel { get { return _genreViewModel; } set {_genreViewModel = value;}}
         public MovieViewModel MovieViewModel { get { return _movieViewModel; } set { _movieViewModel = value; } }
         public Genre SelectedGenre
@@ -39,7 +41,32 @@ namespace IMDB_Project.ViewModels
                 _selectedMovie = value;
                 OnPropertyChanged(nameof(SelectedMovie));
             }
-        }        
+        }
+
+        public string SearchQuery
+        {
+            get { return _searchQuery; }
+            set
+            {
+                if (_searchQuery != value)
+                {
+                    _searchQuery = value;
+                    OnPropertyChanged(nameof(SearchQuery));
+                    FilterMoviesBySearchQuery();
+                }
+            }
+        }
+        public void FilterMoviesBySearchQuery()
+        {
+            if (!string.IsNullOrEmpty(SearchQuery))
+            {
+                _movieViewModel.FilteredMovies = new ObservableCollection<Title>(_movieViewModel.Movies.Where(m => m.PrimaryTitle.ToLower().Contains(SearchQuery.ToLower())));
+            }
+            else
+            {
+                _movieViewModel.FilteredMovies = new ObservableCollection<Title>(_movieViewModel.Movies);
+            }
+        }
 
         public void FilterMoviesByGenre(Genre genre)
         {

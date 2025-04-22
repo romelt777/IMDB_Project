@@ -70,6 +70,7 @@ namespace IMDB_Project
             serviceCollection.AddSingleton<MovieViewModel>();
             serviceCollection.AddSingleton<MovieGenreViewModel>();
             serviceCollection.AddSingleton<TitleGenreViewModel>();
+            serviceCollection.AddSingleton<EpisodeViewModel>();
         }
 
         private void LoadData()
@@ -88,6 +89,7 @@ namespace IMDB_Project
                 var movieViewModel = scope.ServiceProvider.GetRequiredService<MovieViewModel>();
                 var movieGenreViewModel = scope.ServiceProvider.GetRequiredService<MovieGenreViewModel>();
                 var titleGenreViewModel = scope.ServiceProvider.GetRequiredService<TitleGenreViewModel>();
+                var episodeViewModel = scope.ServiceProvider.GetRequiredService<EpisodeViewModel>();
 
                 //load data from database into viewmodel collections
                 titleViewModel.Titles = new ObservableCollection<Title>(dbContext.Titles.ToList());
@@ -107,6 +109,7 @@ namespace IMDB_Project
                 movieGenreViewModel.GenreViewModel = genreViewModel;
                 movieGenreViewModel.MovieViewModel = movieViewModel;
                 movieGenreViewModel._titleGenreViewModel = titleGenreViewModel;
+                episodeViewModel.LoadTvShowsWithEpisodes(dbContext);
             }
 
         }
